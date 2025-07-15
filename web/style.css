@@ -1,0 +1,159 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 11 Jul 2025, 19:49:06
+    Author     : User
+*/
+*{
+    margin: 0;
+    padding:0;
+    box-sizing: border-box;  
+}
+
+/*Body*/
+body{
+    font-family: 'Roboto', sans-serif;
+    background-color: #E3F2FD;
+    color: #333;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/*Header*/
+header{
+    background: linear-gradient(to right, #A5D6A7, #81C784);
+    color: white;
+    padding: 1rem;
+    text-align:center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+header h1, header h2 {
+    font-size: 2rem;
+}
+
+/*Container*/
+.container{
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    flex: 1;
+    padding: 2rem;
+}
+
+/*Card*/
+.card{
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 2.5rem;
+    max-width:600px;
+    width:100%;
+    text-align: center;
+}
+
+.card h2{
+    color: #2E7D32;
+    margin-bottom: 1rem;
+}
+
+.card p{
+    color: #455A64;
+    margin-bottom:1.5rem;
+}
+
+/*Form for login and register*/
+form{
+    display: flex;
+    flex-direction: column;
+    gap:1.2rem;
+}
+
+input[type="text"], input[type="password"]{
+    padding:1rem;
+    border: 1px solid #B0BEC5;
+    border-radius: 5px;
+    font-size: 1rem;
+    width: 100%;
+}
+
+input[type="submit"]{
+    background: linear-gradient(to right, #A5D6A7, #81C784);
+    color: white;
+    border: none;
+    padding: 0.8rem;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+input[type="submit"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/*logout button*/
+.logout-btn {
+    background: linear-gradient(to right,#EF5350, #F44336);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.logout-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/*index.jsp links*/
+.links{
+    margin-top: 1rem;
+}
+
+.links a {
+    color: #2E7D32;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 0 1rem;
+    transition: color 0.2s;
+}
+
+.links a:hover {
+    color: #1B5E20;
+}
+
+/*Messages*/
+.error {
+    color: #D32F2F;
+    margin-top: 1rem;
+}
+
+.success{
+    color: #2E7D32;
+    margin-top: 1rem;
+}
+
+/*Response*/
+@media (max-width: 600px) {
+    header h1, header h2 {
+        font-size: 1.5rem;
+    }
+    
+    .card {
+        padding: 1.5rem;  
+    }
+    
+    input[type="submit"], .logout-btn {
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+    }
+}
