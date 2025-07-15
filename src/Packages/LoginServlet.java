@@ -27,21 +27,21 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         
         //get form data from login.jsp 
-        String studentNumber = request.getParameter("student_number");
+        String username = request.getParameter("username");
         String password = request.getParameter("password");
                 
         //validating input
-        if (studentNumber == null || studentNumber.isEmpty() || password == null || password.isEmpty() ){
-            request.setAttribute("error", "Please enter bth student number and password.");
+        if (username == null || username.isEmpty() || password == null || password.isEmpty() ){
+            request.setAttribute("error", "Please enter both username and password.");
             request.getRequestDispatcher("login.jsp").forward(request, response);
             return;
         }
         
         try (Connection conn = ConnectionDB.getConnection()){
             //query the database for the student
-            String sql = "SELECT name, password FROM users WHERE student_number = ?";
+            String sql = "SELECT username, password FROM Users WHERE username = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, studentNumber);
+            ps.setString(1, username);
             ResultSet rs = ps.executeQuery();
             
             if (rs.next()){
@@ -54,7 +54,7 @@ public class LoginServlet extends HttpServlet {
                 if (storedHashedPassword.equals(hashedInputPassword)){
                     //Login succesfull; redirect to dashboard and create session
                    HttpSession session = request.getSession();
-                   session.setAttribute("studentNumber", studentNumber);
+                   session.setAttribute("username", username);
                    session.setAttribute("studentName", studentName);
                    response.sendRedirect("dashboard.jsp");
                 }else{
@@ -64,7 +64,7 @@ public class LoginServlet extends HttpServlet {
                 }
             }else {
                 //student not found: redirect to login
-                request.setAttribute("error", "Student Number not Found");
+                request.setAttribute("error", "Username not Found");
                 request.getRequestDispatcher("login.jsp").forward(request, response);
             }
         } catch (Exception e){
