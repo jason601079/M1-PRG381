@@ -12,9 +12,10 @@
         try {
             Class.forName("org.postgresql.Driver");
             Connection conn = DriverManager.getConnection(
-                "jdbc:postgresql://localhost:5432/prg381", "postgres", "yourpassword");
+                  "jdbc:postgresql://localhost:5432/M1", "postgres", "Jason1509");
 
-            PreparedStatement ps = conn.prepareStatement("INSERT INTO users(username, email, password) VALUES (?, ?, ?)");
+            PreparedStatement ps = conn.prepareStatement("INSERT INTO students(username, email, password) VALUES (?, ?, ?)");
+
             ps.setString(1, username);
             ps.setString(2, email);
             ps.setString(3, password);
@@ -33,9 +34,10 @@
         try {
             Class.forName("org.postgresql.Driver");
             Connection conn = DriverManager.getConnection(
-                "jdbc:postgresql://localhost:5432/prg381", "postgres", "yourpassword");
+                "jdbc:postgresql://localhost:5432/M1", "postgres", "Jason1509");
 
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM users WHERE username=? AND password=?");
+           PreparedStatement ps = conn.prepareStatement("SELECT * FROM students WHERE username=? AND password=?");
+
             ps.setString(1, username);
             ps.setString(2, password);
             ResultSet rs = ps.executeQuery();
