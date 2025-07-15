@@ -1,14 +1,9 @@
-<%-- 
-    Document   : dashboard
-    Created on : 09 Jul 2025, 09:53:27
-    Author     : Cosmo
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-    String studentName = (String) session.getAttribute("studentName");
+    String user = (String) session.getAttribute("username");
 
-    if (studentName == null) {
+    if (user == null) {
         response.sendRedirect("login.jsp");
         return;
     }
@@ -27,7 +22,7 @@
         </header>
         <div class="container">
             <div class="card">    
-       <h2>Welcome, <%= studentName %>!</h2>
+       <h2>Welcome, <%= user %>!</h2>
         <p>You are logged in to the Student Wellness System!</p>
         
        <form action="LogoutServlet" method="post">
