@@ -22,11 +22,11 @@
 
     if ("POST".equalsIgnoreCase(request.getMethod())) {
 
-        String username = request.getParameter("name");
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
+        String username = request.getParameter("reg-username");
+        String email = request.getParameter("reg-email");
+        String password = request.getParameter("reg-password");
 
-        if (username.isEmpty() || email.isEmpty() || password.isEmpty()) {
+        if (username == null || email == null || password ==null) {
             error = "All fields are required.";
         } else if (!email.matches("^[\\w.-]+@[\\w.-]+\\.\\w{2,}$")) {
             error = "Invalid email format.";
@@ -49,11 +49,11 @@
                 } else {
                     // Insert new user
                     java.sql.PreparedStatement insert = conn.prepareStatement(
-                        "INSERT INTO Users (username, email, password) VALUES (?, ?, ?, )"
+                        "INSERT INTO Users (username, email, password) VALUES (?, ?, ? )"
                     );              
                     insert.setString(1, username);         
                     insert.setString(2, email);               
-                    insert.setString(3, password); // (optional) hash it later
+                    insert.setString(3, password); 
 
                     int result = insert.executeUpdate();
                     if (result > 0) {
@@ -71,9 +71,9 @@
 %>
 
    <form method="post">
-        Username <input type="text" name="username" placeholder="Enter a username"><br/>        
-        Email: <input type="text" name="email" placeholder="Enter an email"><br/>        
-        Password: <input type="password" name="password" placeholder="Enter a password" ><br/>
+        Username <input type="text" name="reg-username" placeholder="Enter a username"><br/>        
+        Email: <input type="text" name="reg-email" placeholder="Enter an email"><br/>        
+        Password: <input type="password" name="reg-password" placeholder="Enter a password" ><br/>
         <input type="submit" value="Register">
     </form>
 
