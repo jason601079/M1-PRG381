@@ -1,0 +1,5 @@
+com\bcwellness\servlets\RegisterServlet.class
+com\bcwellness\servlets\LogoutServlet.class
+com\bcwellness\servlets\LoginServlet.class
+com\bcwellness\utils\TestDBConnection.class
+com\bcwellness\utils\DBConnection.class

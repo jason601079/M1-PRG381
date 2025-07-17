@@ -1,0 +1,10 @@
+## Database Setup
+
+1. Open terminal or command prompt
+2. Create the database:
+
+```bash
+createdb -U postgres bcwellness
+
+``` bash
+psql -U postgres -d bcwellness -f db/schema.sql
