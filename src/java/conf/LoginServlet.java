@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package Packages;
+package conf;
 
 import java.io.IOException;
 import java.security.MessageDigest;
@@ -12,12 +12,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import java.io.PrintWriter;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 
 @WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
@@ -37,25 +37,20 @@ public class LoginServlet extends HttpServlet {
             return;
         }
         
-        try (Connection conn = ConnectionDB.getConnection()){
+        try (Connection conn = utils.ConnectionDB.getConnection()){
             //query the database for the student
-            String sql = "SELECT username, password FROM Users WHERE username = ?";
+            String sql = "SELECT username, password FROM users WHERE username = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, username);
             ResultSet rs = ps.executeQuery();
             
-            if (rs.next()){
-                String storedHashedPassword = rs.getString("password");
-                String studentName = rs.getString("name");
+            if (rs.next()){                          
+                String dbPassword = rs.getString("password");
                 
-                //hash enetered password to compare with one stored in database
-                String hashedInputPassword = hashPassword(password);
-                
-                if (storedHashedPassword.equals(hashedInputPassword)){
+                if (password.equals(dbPassword)){
                     //Login succesfull; redirect to dashboard and create session
                    HttpSession session = request.getSession();
-                   session.setAttribute("username", username);
-                   session.setAttribute("studentName", studentName);
+                   session.setAttribute("username", username);               
                    response.sendRedirect("dashboard.jsp");
                 }else{
                     //incorrect password; redirect to login
@@ -75,14 +70,7 @@ public class LoginServlet extends HttpServlet {
         
     }
     
-      //Hash password (same as registration)
-    private String hashPassword(String password) throws Exception {
-        MessageDigest md = MessageDigest.getInstance("SHA-256");
-        byte[] hashedBytes = md.digest(password.getBytes("UTF-8"));
-        StringBuilder sb = new StringBuilder();
-        for (byte b : hashedBytes) sb.append(String.format("%02x", b));
-        return sb.toString();
-    }
+ 
     
   // Handles POST requests from login.jsp
 @Override
